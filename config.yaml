@@ -1,0 +1,80 @@
+portal:
+  url: "https://affidavit.eci.gov.in/"
+
+runtime:
+  headless: true
+  max_candidates: 4610
+  resume: true
+  dry_run: false
+  timeout_ms: 45000
+  navigation_timeout_ms: 60000
+  retries: 3
+  retry_backoff_seconds: 1.5
+  throttle_min_seconds: 0.8
+  throttle_max_seconds: 2.2
+
+browser:
+  user_agent: "${ECI_USER_AGENT}"
+  viewport:
+    width: 1440
+    height: 900
+
+paths:
+  # Base output folder requested by user
+  output_base: "~/Documents/TN electionss/affidavit"
+  logs_dir: "./logs"
+  progress_file: "./progress.json"
+
+# NOTE: Selectors are intentionally configurable because this portal changes often.
+# Keep specific selectors first, generic fallbacks later.
+selectors:
+  captcha_indicators:
+    - "text=Enter the code"
+    - "text=CAPTCHA"
+    - "text=I am not a robot"
+
+  election_dropdown: "select[name*='Election'], [aria-label*='Election']"
+  election_option: "Assembly Gen Bye Election"
+
+  period_dropdown: "select[name*='Month'], select[name*='Period'], [aria-label*='Month']"
+  period_option: "Mar May 2026"
+
+  type_dropdown: "select[name*='Type'], [aria-label*='Type']"
+  type_option: "AC General"
+
+  state_dropdown: "select[name*='State'], [aria-label*='State']"
+  state_option: "Tamil Nadu"
+
+  search_button_candidates:
+    - "button:has-text('Search')"
+    - "button:has-text('Apply')"
+    - "input[type='submit']"
+
+  accepted_tab_candidates:
+    - "role=tab[name='Accepted']"
+    - "text=Accepted"
+
+  candidate_row_candidates:
+    - "table tbody tr"
+    - ".candidate-list .candidate-row"
+
+  candidate_name_candidates:
+    - "td:nth-child(1)"
+    - ".candidate-name"
+
+  constituency_name_candidates:
+    - "td:nth-child(2)"
+    - ".constituency-name"
+
+  view_more_candidates:
+    - "a:has-text('View More')"
+    - "button:has-text('View More')"
+
+  download_button_candidates:
+    - "a:has-text('Download')"
+    - "button:has-text('Download')"
+
+  next_page_candidates:
+    - "button:has-text('Next')"
+    - "a[rel='next']"
+    - ".pagination .next"
