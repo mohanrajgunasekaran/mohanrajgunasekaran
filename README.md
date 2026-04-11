@@ -182,6 +182,22 @@ Selectors likely to need updates:
 
 ---
 
+
+## Transfer to another GitHub repository
+
+If you want to move these generated files to another repository (for example `election-affidavit-downloader-2026`), use:
+
+```bash
+./transfer_to_repo.sh https://github.com/<your-user>/election-affidavit-downloader-2026.git
+```
+
+The script copies only the project deliverables and then commits/pushes in the target repository:
+- `main.py`
+- `config.yaml`
+- `requirements.txt`
+- `.env.example`
+- `README.md`
+
 ## Legal and compliance note
 
 Use this automation only where permitted by the portal’s terms and applicable law. Respect load constraints (throttling is enabled) and do not attempt to bypass authentication/verification/security controls.
